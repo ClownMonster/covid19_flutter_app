@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:covid19_flutter_app/constants.dart';
 
 
-void main = () => runApp(ClownCovidApp());
+void main(){
+  runApp(ClownCovidApp());
+}
 
 
 
