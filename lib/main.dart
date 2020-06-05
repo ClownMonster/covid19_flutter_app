@@ -6,9 +6,9 @@ import 'package:covid19_flutter_app/constants.dart';
 import 'package:covid19_flutter_app/widgets/counter.dart';
 
 
-void main() => runApp(MyApp());
+void main() => runApp(ClownCovidApp());
 
-class MyApp extends StatelessWidget {
+class ClownCovidApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
