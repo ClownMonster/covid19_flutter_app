@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
             MyHeader(
               image: "assets/Icons/Drcorona.svg",
               textTop: "Clown",
-              textBottom: "Monster's INC",
+              textBottom: "Monster's Inc",
               offset: offset,
             ),
             Container(
