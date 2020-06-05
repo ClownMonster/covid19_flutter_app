@@ -94,7 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         'Karnataka',
                         'Tamil Nadu',
                         'Kerala',
-                        'Delhi'
+                        'Delhi',
+                        'Maharastra',
+                        'Gujarath',
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
