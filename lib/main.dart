@@ -67,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
               textTop: "Clown",
               textBottom: "Monster's Inc",
               offset: offset,
+              pageNo: "1",
             ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20),

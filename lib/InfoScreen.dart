@@ -45,6 +45,7 @@ class _InfoScreenState extends State<InfoScreen> {
               textTop: "Get to know",
               textBottom: "About \n Covid-19.",
               offset: offset,
+              pageNo: "2",
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
