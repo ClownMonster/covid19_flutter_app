@@ -38,13 +38,14 @@ class _InfoScreenState extends State<InfoScreen> {
       body: SingleChildScrollView(
         controller: controller,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             MyHeader(
               image: "assets/Icons/coronadr.svg",
               textTop: "Get to know",
-              textBottom: "About Covid-19.",
+              textBottom: "About \n Covid-19.",
               offset: offset,
+              pageNo: "2",
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),

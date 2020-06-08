@@ -2,21 +2,28 @@ import 'package:covid19_flutter_app/InfoScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:covid19_flutter_app/constants.dart';
+import 'package:covid19_flutter_app/main.dart';
 
 class MyHeader extends StatefulWidget {
   final String image;
   final String textTop;
   final String textBottom;
   final double offset;
+  final String pageNo;
+
   const MyHeader(
-      {Key key, this.image, this.textTop, this.textBottom, this.offset})
+      {Key key, this.image, this.textTop, this.textBottom, this.offset, this.pageNo})
       : super(key: key);
 
   @override
-  _MyHeaderState createState() => _MyHeaderState();
+  _MyHeaderState createState() => _MyHeaderState(this.pageNo);
 }
 
 class _MyHeaderState extends State<MyHeader> {
+  var pageNo;
+  _MyHeaderState(pageNo){
+    this.pageNo = pageNo;
+  }
   @override
   Widget build(BuildContext context) {
     return ClipPath(
@@ -30,7 +37,7 @@ class _MyHeaderState extends State<MyHeader> {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
-              Color(0xFF3383CD),
+              Colors.red,
               Color(0xFF11249F),
             ],
           ),
@@ -47,7 +54,12 @@ class _MyHeaderState extends State<MyHeader> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return InfoScreen();
+                       if(pageNo == "1"){
+                        return InfoScreen();
+                      }
+                      else{
+                        return ClownCovidApp();
+                      }
                     },
                   ),
                 );
