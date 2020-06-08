@@ -2,7 +2,7 @@ import 'package:covid19_flutter_app/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:covid19_flutter_app/constants.dart';
-//import 'package:covid19_flutter_app/InfoScreen.dart';
+import 'package:covid19_flutter_app/Devpage.dart';
 import 'package:covid19_flutter_app/widgets/counter.dart';
 
 
@@ -69,6 +69,23 @@ class _HomeScreenState extends State<HomeScreen> {
               offset: offset,
               pageNo: "1",
             ),
+            new Card(
+              margin: const EdgeInsets.all(20),
+              child: Column(
+                children: <Widget>[Text("Developers Info"),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return Devpage();
+                      }));
+                    },
+                    child:  Image.asset("assets/Images/clowndev.jpg", width: 50,height: 50,)
+                  ),
+                ]
+              ),
+
+            ),
+            
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
