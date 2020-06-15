@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:covid19_flutter_app/constants.dart';
 import 'package:covid19_flutter_app/Devpage.dart';
 import 'package:covid19_flutter_app/widgets/counter.dart';
+import 'package:covid19_flutter_app/apiData/India.dart';
 
 
 void main() => runApp(ClownCovidApp());
@@ -31,15 +32,36 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>{
   final controller = ScrollController();
   double offset = 0;
+
+  States selectedState;
+  List<States> states = <States>[const States(-1,"India"), const States(4, "Karnataka")];
+  List IndianData;
+
+  void clownSetData() async{
+    IndianData = await dataReturner();
+  }
+
+  var Totalcases, Deaths, Recovered;
+  @override
+  void setState(fn) {
+    // TODO: implement setState
+    selectedState = states[0];
+    Totalcases = IndianData[0];
+    Deaths = IndianData[1];
+    Recovered = IndianData[2];
+    super.setState(fn);
+  }
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     controller.addListener(onScroll);
+    
   }
 
   @override
@@ -57,71 +79,70 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        controller: controller,
-        child: Column(
-          children: <Widget>[
-            MyHeader(
-              image: "assets/Icons/Drcorona.svg",
-              textTop: "Clown",
-              textBottom: "Monster's Inc",
-              offset: offset,
-              pageNo: "1",
-            ),
-            new Card(
-              margin: const EdgeInsets.all(20),
-              child: Column(
-                children: <Widget>[Text("Developers Info"),
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context){
-                        return Devpage();
-                      }));
-                    },
-                    child:  Image.asset("assets/Images/clowndev.jpg", width: 50,height: 50,)
-                  ),
-                ]
-              ),
-
-            ),
-            
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              height: 60,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(
-                  color: Color(0xFFE5E5E5),
+        return Scaffold(
+          body: SingleChildScrollView(
+            controller: controller,
+            child: Column(
+              children: <Widget>[
+                MyHeader(
+                  image: "assets/Icons/Drcorona.svg",
+                  textTop: "Clown",
+                  textBottom: "Monster's Inc",
+                  offset: offset,
+                  pageNo: "1",
                 ),
-              ),
-              child: Row(
-                children: <Widget>[
-                  SvgPicture.asset("assets/Icons/maps-and-flags.svg"),
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: DropdownButton(
-                      isExpanded: true,
-                      underline: SizedBox(),
-                      icon: SvgPicture.asset("assets/Icons/dropdown.svg"),
-                      value: "Karnataka",
-                      items: [
-                        'Karnataka',
-                        'Tamil Nadu',
-                        'Kerala',
-                        'Delhi',
-                        'Maharastra',
-                        'Gujarath',
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (value) {},
+                new Card(
+                  margin: const EdgeInsets.all(20),
+                  child: Column(
+                    children: <Widget>[Text("Developers Info"),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return Devpage();
+                          }));
+                        },
+                        child:  Image.asset("assets/Images/clowndev.jpg", width: 50,height: 50,)
+                      ),
+                    ]
+                  ),
+    
+                ),
+                
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  height: 60,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(25),
+                    border: Border.all(
+                      color: Color(0xFFE5E5E5),
+                    ),
+                  ),
+                  child: Row(
+                    children: <Widget>[
+                      SvgPicture.asset("assets/Icons/maps-and-flags.svg"),
+                      SizedBox(width: 20),
+                      Expanded(
+                        child: DropdownButton<States>(
+                          isExpanded: true,
+                          underline: SizedBox(),
+                          icon: SvgPicture.asset("assets/Icons/dropdown.svg"),
+                          value: selectedState,
+                          onChanged: (States newvalue){
+                            setState(() {
+                              selectedState = newvalue;
+                            });
+
+                          },
+                          items: states.map((States state){
+                            return new DropdownMenuItem<States>(
+                              value: state,
+                              child: Text(state.Name),
+                            );
+                          }).toList(),
+
                     ),
                   ),
                 ],
@@ -142,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: kTitleTextstyle,
                             ),
                             TextSpan(
-                              text: "Newest update June 5",
+                              text: DateTime.now().toString(),
                               style: TextStyle(
                                 color: kTextLightColor,
                               ),
@@ -179,17 +200,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: <Widget>[
                         Counter(
                           color: kInfectedColor,
-                          number: 1046,
+                          number: Totalcases,
                           title: "Infected",
                         ),
                         Counter(
                           color: kDeathColor,
-                          number: 87,
+                          number: Deaths,
                           title: "Deaths",
                         ),
                         Counter(
                           color: kRecovercolor,
-                          number: 46,
+                          number: Recovered,
                           title: "Recovered",
                         ),
                       ],
@@ -241,4 +262,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+
+
+
+
+class States{
+  const States(this.ID, this.Name);
+  final int ID;
+  final String Name;
 }
