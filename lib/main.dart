@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:covid19_flutter_app/constants.dart';
 import 'package:covid19_flutter_app/Devpage.dart';
 import 'package:covid19_flutter_app/widgets/counter.dart';
+import 'package:covid19_flutter_app/apiData/India.dart';
 
 
 void main() => runApp(ClownCovidApp());
@@ -31,17 +32,26 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>{
   final controller = ScrollController();
   double offset = 0;
 
   States selectedState;
   List<States> states = <States>[const States(-1,"India"), const States(4, "Karnataka")];
+  List IndianData;
 
+  void clownSetData() async{
+    IndianData = await dataReturner();
+  }
+
+  var Totalcases, Deaths, Recovered;
   @override
   void setState(fn) {
     // TODO: implement setState
     selectedState = states[0];
+    Totalcases = IndianData[0];
+    Deaths = IndianData[1];
+    Recovered = IndianData[2];
     super.setState(fn);
   }
 
@@ -153,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: kTitleTextstyle,
                             ),
                             TextSpan(
-                              text: "Newest update June 5",
+                              text: DateTime.now().toString(),
                               style: TextStyle(
                                 color: kTextLightColor,
                               ),
@@ -190,17 +200,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: <Widget>[
                         Counter(
                           color: kInfectedColor,
-                          number: 1046,
+                          number: Totalcases,
                           title: "Infected",
                         ),
                         Counter(
                           color: kDeathColor,
-                          number: 87,
+                          number: Deaths,
                           title: "Deaths",
                         ),
                         Counter(
                           color: kRecovercolor,
-                          number: 46,
+                          number: Recovered,
                           title: "Recovered",
                         ),
                       ],

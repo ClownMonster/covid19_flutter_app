@@ -32,9 +32,16 @@ Future<void> main(List<String> args) async {
 var response = await http.get("https://api.rootnet.in/covid19-in/stats/latest");
 if(response.statusCode == 200){
   var jsonApiData = json.decode(response.body);
-  var India = jsonApiData['data']['unofficial-summary']; // frontend India Data
-  
-  print(jsonApiData['data']['regional'][0]);
+  var India = jsonApiData['data']['unofficial-summary'][0]; // frontend India Data
+  var total = India['total'];
+  var deaths = India['deaths'];
+  var recovered = India['recovered'];
+  var a = [];
+  //print(jsonApiData['data']['regional'][0]);
+  a.add(total);
+  a.add(deaths);
+  a.add(recovered);
+  return a;
 
 }
 else{
