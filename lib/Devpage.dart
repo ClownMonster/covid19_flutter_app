@@ -64,19 +64,22 @@ class Devpage extends StatelessWidget{
             child: Column(
               children:<Widget>[
 
-                 new RaisedButton(onPressed: () => _launch("https://github.com/ClownMonster"),
+                 new RaisedButton(
+                onPressed: () => _launch("https://github.com/ClownMonster"),
                 child:new Text("GitHub", textAlign: TextAlign.center, textScaleFactor: 1.5,
                 style: TextStyle( color: Colors.white) ,),
                 color: Color(0xFF11249F),
                 ),
                 new Text(""),
-                new RaisedButton(onPressed: () => _launch("https://www.instagram.com/clown_monster10/"),
+                new RaisedButton(
+                onPressed: () => _launch("https://www.instagram.com/clown_monster10/"),
                 child:new Text("Instagram", textAlign: TextAlign.center, textScaleFactor: 1.5,
                 style: TextStyle(color: Colors.white) ,),
                 color:  Color(0xFF11249F),
                 ),
                 new Text(""),
-                new RaisedButton(onPressed: () => _launch("https://www.linkedin.com/in/mohan-kumar-k-6bbba8184/"),
+                new RaisedButton(
+                onPressed: () => _launch("https://www.linkedin.com/in/mohan-kumar-k-6bbba8184/"),
                 child:new Text("LinkedIn", textAlign: TextAlign.center, textScaleFactor: 1.5,
                 style: TextStyle(color: Colors.white) ,),
                 color:  Color(0xFF11249F),
@@ -102,8 +105,6 @@ class Devpage extends StatelessWidget{
                   ),
                 ),
             
-                
-              
               ]
             ),
           ),
