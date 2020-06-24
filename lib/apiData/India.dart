@@ -26,22 +26,31 @@ class ApiData{
 
   ApiData({this.TotalConfirmedCases, this.TotalDeathCases, this.TotalRecoveredCases});
 
-  factory ApiData.fromJson(json){
-    json = json['data']['unofficial-summary'][0];
+  factory ApiData.fromJson(json, int id){
+    if(id == -1){ 
+      json = json['data']['unofficial-summary'][0];
     return ApiData(
         TotalConfirmedCases: json['total'],
         TotalDeathCases: json['deaths'],
         TotalRecoveredCases: json['recovered']
+    );}
+    else{
+      json = json['data']['regional'][id];
+      return ApiData(
+        TotalConfirmedCases: json['totalConfirmed'],
+        TotalDeathCases: json['deaths'],
+        TotalRecoveredCases: json['discharged']
     );
+    }
   }
 
 }
 
 
-Future<ApiData> fetchData() async{
+Future<ApiData> fetchData(int id) async{
   final response = await http.get("https://api.rootnet.in/covid19-in/stats/latest");
   if(response.statusCode == 200){
-    return ApiData.fromJson(json.decode(response.body));
+    return ApiData.fromJson(json.decode(response.body),id);
   }
   else
   {
