@@ -40,18 +40,21 @@ class _HomeScreenState extends State<HomeScreen>{
   final controller = ScrollController();
   double offset = 0;
 
+  // List for DropDown Menu
   States selectedState;
   List<States> states = <States>[
     const States(-1,"India"),
     const States(4, "Karnataka"),
     const States(5, "TamilNadu"),
     ];
+
+  // Api Request Holder
   Future<ApiData> indianData;
 
   @override
   void setState(fn) {
     // TODO: implement setState
-    selectedState = states[0];
+    selectedState = states[0]; // DropDown
     
    super.setState(fn);
   }
@@ -135,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen>{
                           onChanged: (States newvalue){
                             setState(() {
                               this.selectedState = newvalue;
-                              indianData = fetchData();
+                              indianData = fetchData(newvalue.ID);
                             });
 
                           },
