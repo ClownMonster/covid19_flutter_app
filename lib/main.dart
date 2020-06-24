@@ -43,9 +43,24 @@ class _HomeScreenState extends State<HomeScreen>{
   // List for DropDown Menu
   States selectedState;
   List<States> states = <States>[
-    const States(-1,"India"),
-    const States(4, "Karnataka"),
-    const States(5, "TamilNadu"),
+    const States(-1,"India"), const States(0,"Andaman and Nicobar"),
+    const States(1,"Andhra Pradesh"), const States(2,"Arunachal Pradesh"),
+    const States(3,"Assam"), const States(4,"Bihar"),
+    const States(5,"Chandigarh"), const States(6, "Chhattisgarh"),
+    const States(7,"Dadra and Nagar Haveli and Daman and Diu" ), const States(8,	"Delhi" ),
+    const States(9,	"Goa" ), const States(10,"Gujarat" ),
+    const States(11,"Haryana" ), const States(12, "Himachal Pradesh"),
+    const States(13,"Jammu and Kashmir"),const States(14,"Jharkhand"), 
+    const States(15,"Karnataka"),const States(16,"Kerala"),
+    const States(17,"Ladakh"),const States(18,"Madhya Pradesh"),
+    const States(19,"Maharashtra"),const States(20,"Manipur"),
+    const States(21,"Meghalaya"),const States(22,"Mizoram"),
+    const States(23,"Nagaland"),const States(24,"Odisha"),
+    const States(25,"Puducherry"),const States(26,"Punjab"),
+    const States(27,"Rajasthan"),const States(28,"Sikkim"),
+    const States(29,"Tamil Nadu"),const States(30,"Telangana"),
+    const States(31,"Tripura"),const States(32,"Uttarakhand"),
+    const States(33,"Uttar Pradesh"),const States(34,"West Bengal"),
     ];
 
   // Api Request Holder
