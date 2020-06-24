@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen>{
   @override
   void setState(fn) {
     // TODO: implement setState
-    selectedState = states[0]; // DropDown
+    selectedState = states[0]; // DropDown Initial Value set
     
    super.setState(fn);
   }
@@ -64,21 +64,22 @@ class _HomeScreenState extends State<HomeScreen>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller.addListener(onScroll);
-    indianData = fetchData(-1);
+    selectedState = states[0];
+   // controller.addListener(onScroll);
+    indianData = fetchData(-1); // Api Initial Request Made and state is set with that value
     
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    controller.dispose();
+    //controller.dispose(); this changes the dropdown selected value on scroll
     super.dispose();
   }
 
   void onScroll() {
     setState(() {
-      offset = (controller.hasClients) ? controller.offset : 0;
+    offset = (controller.hasClients) ? controller.offset : 0;
     });
   }
 
@@ -112,11 +113,9 @@ class _HomeScreenState extends State<HomeScreen>{
                   ),
     
                 ),
-                
-                Container(
+               new Container(
                   margin: EdgeInsets.symmetric(horizontal: 20),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  height: 60,
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -154,6 +153,7 @@ class _HomeScreenState extends State<HomeScreen>{
                 ],
               ),
             ),
+
             SizedBox(height: 20),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -169,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen>{
                               style: kTitleTextstyle,
                             ),
                             TextSpan(
-                              text: "June",
+                              text: DateTime.now().toString(),
                               style: TextStyle(
                                 color: kTextLightColor,
                               ),
@@ -178,13 +178,6 @@ class _HomeScreenState extends State<HomeScreen>{
                         ),
                       ),
                       Spacer(),
-                      Text(
-                        "See details",
-                        style: TextStyle(
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
                     ],
                   ),
                   SizedBox(height: 20),
@@ -204,7 +197,21 @@ class _HomeScreenState extends State<HomeScreen>{
                     child:FutureBuilder<ApiData>(
                       future: indianData,
                       builder: (context, snapshot){
-                       if(!snapshot.hasData) return CircularProgressIndicator();
+                       if(!snapshot.hasData) {
+                          
+                          return Container(
+                            child: Column(
+                              children: <Widget>[
+                                new Text("Check your Internet connection",
+                                textAlign: TextAlign.center, 
+                                style: TextStyle(color:Colors.black),
+                                ),
+                                new Text(""),
+                                new CircularProgressIndicator(),
+                              ],
+                              ),
+                          );
+                          }
                        else return Column(
                         children: <Widget>[
                         Counter(
@@ -231,47 +238,33 @@ class _HomeScreenState extends State<HomeScreen>{
                       }
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Spread of Virus",
-                        style: kTitleTextstyle,
-                      ),
-                      Text(
-                        "See details",
-                        style: TextStyle(
-                          color: kPrimaryColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    padding: EdgeInsets.all(20),
-                    height: 178,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(0, 10),
-                          blurRadius: 30,
-                          color: kShadowColor,
-                        ),
-                      ],
-                    ),
-                    child: Image.asset(
-                      "assets/Images/map.png",
-                      fit: BoxFit.contain,
-                    ),
-                  ),
+                 
                 ],
               ),
+              
             ),
+            new Container(
+                  margin: EdgeInsets.only(top:10),
+                  padding: EdgeInsets.only(left:20,right:30, top: 4),
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Colors.red,
+                    Color(0xFF11249F),
+                  ],
+                ),
+                ),
+                  
+                  height: 60,
+                  child: Text("Copy Rights @ ClownMonster's Inc 2020", 
+                  textAlign: TextAlign.center, style: TextStyle(color:Colors.white),
+                  ),
+                ),
+            
           ],
         ),
       ),
