@@ -41,7 +41,8 @@ if(response.statusCode == 200){
   a.add(total);
   a.add(deaths);
   a.add(recovered);
-  return a;
+  print(total.runtimeType);
+  print('\nDone');
 
 }
 else{

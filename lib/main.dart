@@ -1,3 +1,6 @@
+//import 'dart:convert';
+//import 'dart:html';
+
 import 'package:covid19_flutter_app/widgets/my_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +8,7 @@ import 'package:covid19_flutter_app/constants.dart';
 import 'package:covid19_flutter_app/Devpage.dart';
 import 'package:covid19_flutter_app/widgets/counter.dart';
 import 'package:covid19_flutter_app/apiData/India.dart';
+//import 'package:http/http.dart' as http;
 
 
 void main() => runApp(ClownCovidApp());
@@ -37,22 +41,19 @@ class _HomeScreenState extends State<HomeScreen>{
   double offset = 0;
 
   States selectedState;
-  List<States> states = <States>[const States(-1,"India"), const States(4, "Karnataka")];
-  List IndianData;
+  List<States> states = <States>[
+    const States(-1,"India"),
+    const States(4, "Karnataka"),
+    const States(5, "TamilNadu"),
+    ];
+  Future<ApiData> indianData;
 
-  void clownSetData() async{
-    IndianData = await dataReturner();
-  }
-
-  var Totalcases, Deaths, Recovered;
   @override
   void setState(fn) {
     // TODO: implement setState
     selectedState = states[0];
-    Totalcases = IndianData[0];
-    Deaths = IndianData[1];
-    Recovered = IndianData[2];
-    super.setState(fn);
+    
+   // super.setState(fn);
   }
 
 
@@ -61,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen>{
     // TODO: implement initState
     super.initState();
     controller.addListener(onScroll);
+    indianData = fetchData();
     
   }
 
@@ -133,6 +135,7 @@ class _HomeScreenState extends State<HomeScreen>{
                           onChanged: (States newvalue){
                             setState(() {
                               selectedState = newvalue;
+                             
                             });
 
                           },
@@ -163,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen>{
                               style: kTitleTextstyle,
                             ),
                             TextSpan(
-                              text: DateTime.now().toString(),
+                              text: "June",
                               style: TextStyle(
                                 color: kTextLightColor,
                               ),
@@ -195,25 +198,32 @@ class _HomeScreenState extends State<HomeScreen>{
                         ),
                       ],
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
+                    child:FutureBuilder<ApiData>(
+                      future: indianData,
+                      builder: (context, snapshot){
+                       if(!snapshot.hasData) return CircularProgressIndicator();
+                       else return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
                         Counter(
                           color: kInfectedColor,
-                          number: Totalcases,
+                          number:snapshot.data.TotalConfirmedCases,
                           title: "Infected",
                         ),
                         Counter(
                           color: kDeathColor,
-                          number: Deaths,
+                          number: snapshot.data.TotalDeathCases,
                           title: "Deaths",
                         ),
                         Counter(
                           color: kRecovercolor,
-                          number: Recovered,
+                          number: snapshot.data.TotalDeathCases,
                           title: "Recovered",
                         ),
                       ],
+
+                       );
+                      }
                     ),
                   ),
                   SizedBox(height: 20),
@@ -266,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen>{
 
 
 
-
+// for listing States in DropDown
 class States{
   const States(this.ID, this.Name);
   final int ID;
