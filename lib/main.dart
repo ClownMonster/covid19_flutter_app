@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen>{
     // TODO: implement setState
     selectedState = states[0];
     
-   // super.setState(fn);
+   super.setState(fn);
   }
 
 
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen>{
     // TODO: implement initState
     super.initState();
     controller.addListener(onScroll);
-    indianData = fetchData();
+    indianData = fetchData(-1);
     
   }
 
@@ -134,8 +134,8 @@ class _HomeScreenState extends State<HomeScreen>{
                           value: selectedState,
                           onChanged: (States newvalue){
                             setState(() {
-                              selectedState = newvalue;
-                             
+                              this.selectedState = newvalue;
+                              indianData = fetchData();
                             });
 
                           },
@@ -202,19 +202,21 @@ class _HomeScreenState extends State<HomeScreen>{
                       future: indianData,
                       builder: (context, snapshot){
                        if(!snapshot.hasData) return CircularProgressIndicator();
-                       else return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       else return Column(
                         children: <Widget>[
                         Counter(
                           color: kInfectedColor,
-                          number:snapshot.data.TotalConfirmedCases,
                           title: "Infected",
+                          number:snapshot.data.TotalConfirmedCases,
+                          
                         ),
+                        Text(""),
                         Counter(
                           color: kDeathColor,
                           number: snapshot.data.TotalDeathCases,
                           title: "Deaths",
                         ),
+                        Text(""),
                         Counter(
                           color: kRecovercolor,
                           number: snapshot.data.TotalDeathCases,
