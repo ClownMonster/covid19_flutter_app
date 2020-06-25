@@ -4,12 +4,44 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:covid19_flutter_app/widgets/my_header.dart';
 
 
-class Devpage extends StatelessWidget{
+class Devpage extends StatefulWidget{
+  @override 
+  _DevpageState createState() => _DevpageState();
+
+}
+
+
+class _DevpageState extends State<Devpage>{
+  final controller = ScrollController();
+  double offset = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.addListener(onScroll);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    controller.dispose();
+    super.dispose();
+  }
+
+  void onScroll() {
+    setState(() {
+      offset = (controller.hasClients) ? controller.offset : 0;
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  
       body:SingleChildScrollView(
+        controller: controller,
         child: Column(
           children:<Widget>[
           new ClipPath(
