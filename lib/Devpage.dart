@@ -92,7 +92,6 @@ class _DevpageState extends State<Devpage>{
           )),),
           new Container(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height-300.0,
             child: Column(
               children:<Widget>[
 
@@ -119,6 +118,7 @@ class _DevpageState extends State<Devpage>{
                 ),
                 new Container(
                   margin: EdgeInsets.only(top:10),
+                  padding: EdgeInsets.all(10),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -131,8 +131,7 @@ class _DevpageState extends State<Devpage>{
                 ),
                 ),
                   width: double.infinity,
-                  height: 45,
-                  child: Text("Copy Rights @ ClownMonster's Inc 2020", 
+                  child: Text("Copy Rights @ ClownMonster's Inc \n 2020", 
                   textAlign: TextAlign.center, style: TextStyle(color:Colors.white),
                   ),
                 ),
