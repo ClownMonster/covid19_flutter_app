@@ -276,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen>{
                 ),
                   
                   height: 60,
-                  child: Text("Copyright © 2020  ClownMonster's Inc", 
+                  child: Text("Copyright © 2020 \n ClownMonster's Inc", 
                   textAlign: TextAlign.center, style: TextStyle(color:Colors.white),
                   ),
                 ),
