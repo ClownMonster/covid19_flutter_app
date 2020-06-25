@@ -107,11 +107,11 @@ class _InfoScreenState extends State<InfoScreen> {
                 width: double.infinity,
                 color: Colors.green,
                 child: new GestureDetector(
-                    onTap: () => launch("tel:9380279590"),
+                    onTap: () => launch("tel:1075"),
                     child: Row(children: [
                   new IconButton(
                     icon: new Icon(Icons.call), 
-                    onPressed:() => launch("tel:9380279590")
+                    onPressed:() => launch("tel:1075")
                   ),
                   new Text("  "),
                    new Text("Helpline Number", 
