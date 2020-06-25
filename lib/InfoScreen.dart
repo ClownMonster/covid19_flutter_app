@@ -92,7 +92,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                   PreventCard(
                     text:
-                        "Since the start of the coronavirus outbreak some places have fully embraced wearing facemasks",
+                        "Since hands are your primary contact, wash your hands regularly and sanitize them frequently",
                     image: "assets/Images/wash_hands.png",
                     title: "Wash your hands",
                   ),
@@ -193,7 +193,6 @@ class PreventCard extends StatelessWidget {
                     ),
                     Align(
                       alignment: Alignment.topRight,
-                      child: SvgPicture.asset("assets/Icons/forward.svg"),
                     ),
                   ],
                 ),
