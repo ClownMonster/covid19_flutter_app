@@ -92,7 +92,7 @@ class _InfoScreenState extends State<InfoScreen> {
                   ),
                   PreventCard(
                     text:
-                        "Since the start of the coronavirus outbreak some places have fully embraced wearing facemasks",
+                        "Since hands are your primary contact, wash your hands regularly and sanitize them frequently",
                     image: "assets/Images/wash_hands.png",
                     title: "Wash your hands",
                   ),
@@ -107,11 +107,11 @@ class _InfoScreenState extends State<InfoScreen> {
                 width: double.infinity,
                 color: Colors.green,
                 child: new GestureDetector(
-                    onTap: () => launch("tel:9380279590"),
+                    onTap: () => launch("tel:1075"),
                     child: Row(children: [
                   new IconButton(
                     icon: new Icon(Icons.call), 
-                    onPressed:() => launch("tel:9380279590")
+                    onPressed:() => launch("tel:1075")
                   ),
                   new Text("  "),
                    new Text("Helpline Number", 
@@ -193,7 +193,6 @@ class PreventCard extends StatelessWidget {
                     ),
                     Align(
                       alignment: Alignment.topRight,
-                      child: SvgPicture.asset("assets/Icons/forward.svg"),
                     ),
                   ],
                 ),

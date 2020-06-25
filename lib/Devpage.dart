@@ -131,7 +131,7 @@ class _DevpageState extends State<Devpage>{
                 ),
                 ),
                   width: double.infinity,
-                  child: Text("Copy Rights @ ClownMonster's Inc \n 2020", 
+                  child: Text("Copyright © 2020 \nClownMonster's Inc", 
                   textAlign: TextAlign.center, style: TextStyle(color:Colors.white),
                   ),
                 ),
