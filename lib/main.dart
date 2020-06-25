@@ -112,6 +112,7 @@ class _HomeScreenState extends State<HomeScreen>{
                   offset: offset,
                   pageNo: "1",
                 ),
+                new Container(),
                 new Card(
                   margin: const EdgeInsets.all(20),
                   child: Column(
@@ -244,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen>{
                         Text(""),
                         Counter(
                           color: kRecovercolor,
-                          number: snapshot.data.TotalDeathCases,
+                          number: snapshot.data.TotalRecoveredCases,
                           title: "Recovered",
                         ),
                       ],

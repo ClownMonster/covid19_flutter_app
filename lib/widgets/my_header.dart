@@ -64,7 +64,12 @@ class _MyHeaderState extends State<MyHeader> {
                   ),
                 );
               },
-              child: SvgPicture.asset("assets/Icons/menu.svg"),
+              child: new Column(children: <Widget>[
+               new SvgPicture.asset("assets/Icons/menu.svg"),
+               new Text("Menu", textAlign: TextAlign.center,
+               style: TextStyle(color:Colors.white),),
+
+              ],),
             ),
             SizedBox(height: 20),
             Expanded(

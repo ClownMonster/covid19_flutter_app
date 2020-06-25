@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:covid19_flutter_app/constants.dart';
 import 'package:covid19_flutter_app/widgets/my_header.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class InfoScreen extends StatefulWidget {
   @override
@@ -31,6 +32,8 @@ class _InfoScreenState extends State<InfoScreen> {
       offset = (controller.hasClients) ? controller.offset : 0;
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -94,10 +97,32 @@ class _InfoScreenState extends State<InfoScreen> {
                     title: "Wash your hands",
                   ),
                   SizedBox(height: 50),
+                  
                 ],
+
               ),
-            )
-          ],
+              
+            ),
+            new Container( // launches to dialpad to make a call to helpline number
+                width: double.infinity,
+                color: Colors.green,
+                child: new GestureDetector(
+                    onTap: () => launch("tel:9380279590"),
+                    child: Row(children: [
+                  new IconButton(
+                    icon: new Icon(Icons.call), 
+                    onPressed:() => launch("tel:9380279590")
+                  ),
+                  new Text("  "),
+                   new Text("Helpline Number", 
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color:Colors.white),
+                         )
+
+                    ],),
+                  ),    
+              ),
+      ],
         ),
       ),
     );
