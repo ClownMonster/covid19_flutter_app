@@ -17,14 +17,12 @@ class _DevpageState extends State<Devpage>{
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller.addListener(onScroll);
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     controller.dispose();
     super.dispose();
   }
@@ -135,6 +133,10 @@ class _DevpageState extends State<Devpage>{
                   textAlign: TextAlign.center, style: TextStyle(color:Colors.white),
                   ),
                 ),
+                new Container(
+                  height: 50,
+                ),
+            
             
               ]
             ),

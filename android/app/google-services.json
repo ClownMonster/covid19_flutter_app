@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "991398492915",
+    "firebase_url": "https://bharathcovid-5f133.firebaseio.com",
+    "project_id": "bharathcovid-5f133",
+    "storage_bucket": "bharathcovid-5f133.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991398492915:android:338dd05d9a896d6774d586",
+        "android_client_info": {
+          "package_name": "com.example.covid19_flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991398492915-q0lun0u870k2tbor54qv0b3gophv5sjb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.covid19_flutter_app",
+            "certificate_hash": "d80e478eb28f752a37f5e1dae100ac43153be0e0"
+          }
+        },
+        {
+          "client_id": "991398492915-ggeqg3irp2gfscr8tgcdlriq6j3mrbcs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxDqfz3My_SObqg8g0l23U5TzV3QMjEus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991398492915-ggeqg3irp2gfscr8tgcdlriq6j3mrbcs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
