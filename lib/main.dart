@@ -9,6 +9,7 @@ import 'package:covid19_flutter_app/Devpage.dart';
 import 'package:covid19_flutter_app/widgets/counter.dart';
 import 'package:covid19_flutter_app/apiData/India.dart';
 //import 'package:http/http.dart' as http;
+import 'package:firebase_admob/firebase_admob.dart'; // for ads
 
 
 void main() => runApp(ClownCovidApp());
@@ -24,7 +25,7 @@ class ClownCovidApp extends StatelessWidget {
           scaffoldBackgroundColor: kBackgroundColor,
           fontFamily: "Poppins",
           textTheme: TextTheme(
-            body1: TextStyle(color: kBodyTextColor),
+            bodyText1: TextStyle(color: kBodyTextColor),
           )),
       home: HomeScreen(),
     );
@@ -68,7 +69,6 @@ class _HomeScreenState extends State<HomeScreen>{
 
   @override
   void setState(fn) {
-    // TODO: implement setState
     selectedState = states[0]; // DropDown Initial Value set
     
    super.setState(fn);
@@ -77,19 +77,22 @@ class _HomeScreenState extends State<HomeScreen>{
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     selectedState = states[0];
    // controller.addListener(onScroll);
     indianData = fetchData(-1); // Api Initial Request Made and state is set with that value
-    
+
+    FirebaseAdMob.instance.initialize(
+      appId: "ca-app-pub-3125034036050714~3158535940").then((response){
+        myBanner..load()..show();
+      }); 
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     //controller.dispose(); this changes the dropdown selected value on scroll
     super.dispose();
+    myBanner.dispose();
   }
 
   void onScroll() {
@@ -153,14 +156,14 @@ class _HomeScreenState extends State<HomeScreen>{
                           onChanged: (States newvalue){
                             setState(() {
                               this.selectedState = newvalue;
-                              indianData = fetchData(newvalue.ID);
+                              indianData = fetchData(newvalue.iD);
                             });
 
                           },
                           items: states.map((States state){
                             return new DropdownMenuItem<States>(
                               value: state,
-                              child: Text(state.Name),
+                              child: Text(state.name),
                             );
                           }).toList(),
 
@@ -233,19 +236,19 @@ class _HomeScreenState extends State<HomeScreen>{
                         Counter(
                           color: kInfectedColor,
                           title: "Infected",
-                          number:snapshot.data.TotalConfirmedCases,
+                          number:snapshot.data.totalConfirmedCases,
                           
                         ),
                         Text(""),
                         Counter(
                           color: kDeathColor,
-                          number: snapshot.data.TotalDeathCases,
+                          number: snapshot.data.totalDeathCases,
                           title: "Deaths",
                         ),
                         Text(""),
                         Counter(
                           color: kRecovercolor,
-                          number: snapshot.data.TotalRecoveredCases,
+                          number: snapshot.data.totalRecoveredCases,
                           title: "Recovered",
                         ),
                       ],
@@ -280,6 +283,9 @@ class _HomeScreenState extends State<HomeScreen>{
                   textAlign: TextAlign.center, style: TextStyle(color:Colors.white),
                   ),
                 ),
+                new Container(
+                  height: 50,
+                ),
             
           ],
         ),
@@ -292,7 +298,26 @@ class _HomeScreenState extends State<HomeScreen>{
 
 // for listing States in DropDown
 class States{
-  const States(this.ID, this.Name);
-  final int ID;
-  final String Name;
+  const States(this.iD, this.name);
+  final int iD;
+  final String name;
 }
+
+
+MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
+  //keywords: <String>['games', 'beautiful apps','pubg'],
+  //contentUrl: 'https://flutter.io',
+  //childDirected: false,
+  gender:  MobileAdGender.unknown,//or MobileAdGender.female,
+  //testDevices: <String>['Mobile_id'], // Android emulators are considered test devices
+);
+
+
+BannerAd myBanner = BannerAd(
+  adUnitId:"ca-app-pub-3125034036050714/1663930373",
+  size: AdSize.smartBanner,
+ // targetingInfo: targetingInfo,
+  listener: (MobileAdEvent event) {
+    print("BannerAd event is $event");
+  },
+);
