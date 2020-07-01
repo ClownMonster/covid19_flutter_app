@@ -40,6 +40,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>{
   final controller = ScrollController();
   double offset = 0;
+  MobileAdTargetingInfo targetingInfo;
+  BannerAd myBanner;
 
   // List for DropDown Menu
   States selectedState;
@@ -82,10 +84,24 @@ class _HomeScreenState extends State<HomeScreen>{
    // controller.addListener(onScroll);
     indianData = fetchData(-1); // Api Initial Request Made and state is set with that value
 
-    FirebaseAdMob.instance.initialize(
-      appId: "ca-app-pub-3125034036050714~3158535940").then((response){
-        myBanner..load()..show();
-      }); 
+    targetingInfo = MobileAdTargetingInfo(
+      keywords: <String>['games', 'beautiful apps','pubg','cars'],
+        nonPersonalizedAds: true,
+        //birthday: DateTime.now(),
+        testDevices: <String>['Mobile_id'], // Android emulators are considered test devices
+      );
+
+      myBanner = BannerAd(
+        adUnitId:"ca-app-pub-3125034036050714/5186304616",
+       size: AdSize.banner,
+        targetingInfo: targetingInfo,
+        listener: (MobileAdEvent event) {
+          print("BannerAd event is $event");
+        },
+      );
+
+    FirebaseAdMob.instance.initialize(appId:"ca-app-pub-3125034036050714~3158535940");
+        myBanner..load()..show(); 
   }
 
   @override
@@ -103,6 +119,7 @@ class _HomeScreenState extends State<HomeScreen>{
 
   @override
   Widget build(BuildContext context) {
+
         return Scaffold(
           body: SingleChildScrollView(
             controller: controller,
@@ -304,20 +321,5 @@ class States{
 }
 
 
-MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-  //keywords: <String>['games', 'beautiful apps','pubg'],
-  //contentUrl: 'https://flutter.io',
-  //childDirected: false,
-  gender:  MobileAdGender.unknown,//or MobileAdGender.female,
-  //testDevices: <String>['Mobile_id'], // Android emulators are considered test devices
-);
 
 
-BannerAd myBanner = BannerAd(
-  adUnitId:"ca-app-pub-3125034036050714/1663930373",
-  size: AdSize.smartBanner,
- // targetingInfo: targetingInfo,
-  listener: (MobileAdEvent event) {
-    print("BannerAd event is $event");
-  },
-);

@@ -15,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "991398492915-q0lun0u870k2tbor54qv0b3gophv5sjb.apps.googleusercontent.com",
+          "client_id": "991398492915-fp5ldn3uksg49qvkk7sq0uvtvobigfja.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.covid19_flutter_app",
@@ -41,7 +41,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-3125034036050714~3158535940"
     }
   ],
   "configuration_version": "1"
