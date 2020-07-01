@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen>{
     indianData = fetchData(-1); // Api Initial Request Made and state is set with that value
 
     targetingInfo = MobileAdTargetingInfo(
-      keywords: <String>['games', 'beautiful apps','pubg','cars'],
+      keywords: <String>['games', 'beautiful apps','pubg','cars','apps','facebook','instagram'],
         nonPersonalizedAds: true,
         //birthday: DateTime.now(),
         testDevices: <String>['Mobile_id'], // Android emulators are considered test devices
