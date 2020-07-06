@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:covid19_flutter_app/constants.dart';
 import 'package:covid19_flutter_app/main.dart';
 
+
 class MyHeader extends StatefulWidget {
   final String image;
   final String textTop;
@@ -24,6 +25,7 @@ class _MyHeaderState extends State<MyHeader> {
   _MyHeaderState(pageNo){
     this.pageNo = pageNo;
   }
+
   @override
   Widget build(BuildContext context) {
     return ClipPath(
