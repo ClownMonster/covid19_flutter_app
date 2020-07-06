@@ -40,8 +40,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>{
   final controller = ScrollController();
   double offset = 0;
+
+  // global admob data
   MobileAdTargetingInfo targetingInfo;
   BannerAd myBanner;
+  InterstitialAd myInterstitial;
 
   // List for DropDown Menu
   States selectedState;
@@ -72,13 +75,14 @@ class _HomeScreenState extends State<HomeScreen>{
   @override
   void setState(fn) {
     selectedState = states[0]; // DropDown Initial Value set
-    
-   super.setState(fn);
+    super.setState(fn);
   }
 
 
   @override
   void initState() {
+    FirebaseAdMob.instance.initialize(appId:"ca-app-pub-3125034036050714~3158535940");
+    
     super.initState();
     selectedState = states[0];
    // controller.addListener(onScroll);
@@ -87,28 +91,57 @@ class _HomeScreenState extends State<HomeScreen>{
     targetingInfo = MobileAdTargetingInfo(
       keywords: <String>['games', 'beautiful apps','pubg','cars','apps','facebook','instagram'],
         nonPersonalizedAds: true,
-        //birthday: DateTime.now(),
+        birthday: DateTime.now(),
+        childDirected: false,
+        designedForFamilies: false,
+        gender: MobileAdGender.male,
         testDevices: <String>['Mobile_id'], // Android emulators are considered test devices
       );
 
-      myBanner = BannerAd(
+    myBanner = BannerAd(
         adUnitId:"ca-app-pub-3125034036050714/5186304616",
-       size: AdSize.banner,
+        size: AdSize.smartBanner,
         targetingInfo: targetingInfo,
         listener: (MobileAdEvent event) {
           print("BannerAd event is $event");
         },
       );
 
-    FirebaseAdMob.instance.initialize(appId:"ca-app-pub-3125034036050714~3158535940");
-        myBanner..load()..show(); 
+        myBanner
+        ..load()
+        ..show(
+          anchorType: AnchorType.bottom,
+        );
+
+    myInterstitial = InterstitialAd(
+     adUnitId:"ca-app-pub-3125034036050714/5346651363",
+     targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+      print("InterstitialAd event is $event");
+      },
+    );
+
+    myInterstitial..load();
+        
+  }
+
+  void showInterstial(){
+    myInterstitial
+    ..load()
+    ..show(
+    anchorType: AnchorType.bottom,
+    anchorOffset: 0.0,
+    horizontalCenterOffset: 0.0,
+    );
   }
 
   @override
   void dispose() {
     //controller.dispose(); this changes the dropdown selected value on scroll
     super.dispose();
+    myInterstitial.dispose();
     myBanner.dispose();
+    
   }
 
   void onScroll() {
@@ -116,6 +149,9 @@ class _HomeScreenState extends State<HomeScreen>{
     offset = (controller.hasClients) ? controller.offset : 0;
     });
   }
+
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -279,6 +315,7 @@ class _HomeScreenState extends State<HomeScreen>{
               ),
               
             ),
+            new RaisedButton(onPressed: showInterstial,child: Text("press here"), ),
             new Container(
                   margin: EdgeInsets.only(top:10),
                   padding: EdgeInsets.only(left:20,right:30, top: 4),
@@ -299,9 +336,6 @@ class _HomeScreenState extends State<HomeScreen>{
                   child: Text("Copyright © 2020 \n ClownMonster's Inc", 
                   textAlign: TextAlign.center, style: TextStyle(color:Colors.white),
                   ),
-                ),
-                new Container(
-                  height: 50,
                 ),
             
           ],
