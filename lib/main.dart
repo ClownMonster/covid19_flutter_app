@@ -12,7 +12,12 @@ import 'package:covid19_flutter_app/apiData/India.dart';
 import 'package:firebase_admob/firebase_admob.dart'; // for ads
 
 
-void main() => runApp(ClownCovidApp());
+void main(){
+
+  FirebaseAdMob.instance.initialize(appId:"ca-app-pub-3125034036050714~3158535940");
+  runApp(ClownCovidApp());
+
+}
 
 class ClownCovidApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -81,9 +86,6 @@ class _HomeScreenState extends State<HomeScreen>{
 
   @override
   void initState() {
-    FirebaseAdMob.instance.initialize(appId:"ca-app-pub-3125034036050714~3158535940");
-    
-    super.initState();
     selectedState = states[0];
    // controller.addListener(onScroll);
     indianData = fetchData(-1); // Api Initial Request Made and state is set with that value
@@ -113,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen>{
           anchorType: AnchorType.bottom,
         );
 
-    myInterstitial = InterstitialAd(
+  myInterstitial = InterstitialAd(
      adUnitId:"ca-app-pub-3125034036050714/5346651363",
      targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
@@ -122,10 +124,12 @@ class _HomeScreenState extends State<HomeScreen>{
     );
 
     myInterstitial..load();
+
+    super.initState();
         
   }
 
-  void showInterstial(){
+void showInterstial(){
     myInterstitial
     ..load()
     ..show(
@@ -133,6 +137,7 @@ class _HomeScreenState extends State<HomeScreen>{
     anchorOffset: 0.0,
     horizontalCenterOffset: 0.0,
     );
+
   }
 
   @override
@@ -315,7 +320,6 @@ class _HomeScreenState extends State<HomeScreen>{
               ),
               
             ),
-            new RaisedButton(onPressed: showInterstial,child: Text("press here"), ),
             new Container(
                   margin: EdgeInsets.only(top:10),
                   padding: EdgeInsets.only(left:20,right:30, top: 4),
