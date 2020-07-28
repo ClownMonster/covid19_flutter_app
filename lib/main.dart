@@ -12,12 +12,7 @@ import 'package:covid19_flutter_app/apiData/India.dart';
 import 'package:firebase_admob/firebase_admob.dart'; // for ads
 
 
-void main(){
-
-  FirebaseAdMob.instance.initialize(appId:"ca-app-pub-3125034036050714~3158535940");
-  runApp(ClownCovidApp());
-
-}
+void main() => runApp(ClownCovidApp());
 
 class ClownCovidApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -86,6 +81,8 @@ class _HomeScreenState extends State<HomeScreen>{
 
   @override
   void initState() {
+    
+  FirebaseAdMob.instance.initialize(appId:"ca-app-pub-3125034036050714~3158535940");
     selectedState = states[0];
    // controller.addListener(onScroll);
     indianData = fetchData(-1); // Api Initial Request Made and state is set with that value

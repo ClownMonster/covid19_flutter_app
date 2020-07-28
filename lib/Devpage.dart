@@ -133,10 +133,6 @@ class _DevpageState extends State<Devpage>{
                   textAlign: TextAlign.center, style: TextStyle(color:Colors.white),
                   ),
                 ),
-                new Container(
-                  height: 50,
-                ),
-            
             
               ]
             ),

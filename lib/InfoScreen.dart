@@ -120,10 +120,6 @@ class _InfoScreenState extends State<InfoScreen> {
                     ],),
                   ),    
               ),
-              new Container(
-                  height: 55,
-                ),
-            
       ],
         ),
       ),
